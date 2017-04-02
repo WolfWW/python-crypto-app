@@ -9,10 +9,8 @@ import base
 def encMix(keyfile,rawfile):
     #rsa加密DES密钥
     pub_key = base.getPubKey(keyfile) 
-    des_key = input('输入8字节DES密钥:')
-    # 随机生成8字节IV，加解密时均自动使用
-    des_IV = ''.join(random.sample(string.ascii_letters+string.digits,8))
-    des_data = des_key + des_IV
+    # 随机生成16字节密钥+IV，加解密时均自动使用
+    des_data = ''.join(random.sample(string.ascii_letters+string.digits,16))
     enc_des = rsa.encrypt(des_data.encode('utf-8'),pub_key)
     des = pyDes.des(des_key,pyDes.CBC,des_IV,pad=None,padmode=pyDes.PAD_PKCS5)
 
