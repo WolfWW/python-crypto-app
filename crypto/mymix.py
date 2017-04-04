@@ -6,25 +6,25 @@ import rsa,pyDes
 import base
 
 #加密
-def encMix(keyfile,rawfile):
+def encMix(key_filename,rawfilename,mode,operation):
     #rsa加密DES密钥
-    pub_key = base.getPubKey(keyfile) 
+    pub_key = base.getPubKey(key_filename) 
     # 随机生成16字节密钥+IV，加解密时均自动使用
     des_data = ''.join(random.sample(string.ascii_letters+string.digits,16))
     enc_des = rsa.encrypt(des_data.encode('utf-8'),pub_key)
     des = pyDes.des(des_key,pyDes.CBC,des_IV,pad=None,padmode=pyDes.PAD_PKCS5)
 
     #DES加密文件
-    with open(rawfile,'rb') as f:
+    with open(rawfilename,'rb') as f:
         data = f.read()
         enc_data = des.encrypt(data)
         f.close()
 
     #密文文件命名
-    newfile = base.newFileName(rawfile,mode='m',operation=0)    
+    newfile = base.newFileName(rawfilename,mode,operation)    
      
     #密文写入
-    with open(newname,'wb') as f:
+    with open(newfile,'wb') as f:
         [f.write(x) for x in (enc_des,enc_data)]
         f.close()
         
@@ -41,15 +41,15 @@ def size_in_bytes(priv_key):
     return bytes
     
 #解密
-def decMix(keyfile,rawfile):
+def decMix(key_filename,rawfilename):
     #读取私钥
-    priv_key = base.getPrivKey(keyfile)
+    priv_key = base.getPrivKey(key_filename)
 
     #计算DES密钥密文的长度
     len_of_enc_des = size_in_bytes(priv_key)
 
     #分别读取DES密钥密文和明文密文
-    with open(rawfile,'rb') as f:
+    with open(rawfilename,'rb') as f:
         wait_dec_des,wait_dec_data = [f.read(x) for x in (len_of_enc_des,-1)]
         #读取密钥密文，剩下的是明文密文
         f.close()
@@ -60,10 +60,10 @@ def decMix(keyfile,rawfile):
     des = pyDes.des(dec_des_key,pyDes.CBC,dec_des_IV,pad=None,padmode=pyDes.PAD_PKCS5)
 
     #明文文件命名
-    newfile = base.newFileName(rawfile,mode='m',operation=1)
+    newfile = base.newFileName(rawfilename,mode,operation)
     
     #解密文件
-    with open(newname,'wb') as f:
+    with open(newfile,'wb') as f:
         dec_data = des.decrypt(wait_dec_data)
         f.write(dec_data)
         f.close()

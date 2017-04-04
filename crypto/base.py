@@ -6,17 +6,17 @@ import rsa
 
 # 给新文件命名,不论加密还是解密
 # 参数有源文件、选择模式、选择操作
-def newFileName(rawfile,mode,operation):
-    pathname = rawfile.split('.')[0] #获得源文件名
-    lastname = rawfile.split('.')[1] #获得源文件后缀，选取第一个后缀
+def newFileName(rawfilename,mode,operation):
+    pathname = rawfilename.split('.')[0] #获得源文件名
+    lastname = rawfilename.split('.')[1] #获得源文件后缀，选取第一个后缀
     rawpathname = pathname.split('-')[0] #去掉可能存在的上一次加解密操作的命名
     count = 0  #自增变量，文件名查重后生成新文件名
     #新文件名=源文件名+加解密模式+count+后缀
-    newname = rawpathname +  '-mode-%s-operation-%d'%(mode,operation) + '.' + lastname
+    newname = rawpathname +  '-mode-%s-operation-%s'%(mode,operation) + '.' + lastname
     #查重后生成新文件名
     while os.path.isfile(newname):
         count += 1
-        newname = rawpathname + '-mode-%s-operation-%d-(%d)'%(mode,operation,count) + '.' + lastname
+        newname = rawpathname + '-mode-%s-operation-%s-(%d)'%(mode,operation,count) + '.' + lastname
     return newname
 
 #生成密钥对，并记录在文件中
@@ -32,7 +32,7 @@ def geneKeys(bits_num):
         f1.close()
         f2.write(rsa.PrivateKey.save_pkcs1(priv_key))
         f2.close()
-    print('Done!密钥文件已生成')
+    return 'Done!密钥文件已生成'
 
 #读取密钥文件中的公钥
 def getPubKey(keyfile):
