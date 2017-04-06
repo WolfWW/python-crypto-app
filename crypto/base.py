@@ -35,12 +35,12 @@ def geneKeys(bits_num):
     return 'Done!密钥文件已生成'
 
 #读取密钥文件中的公钥
-def getPubKey(keyfile):
+def getPubKey(keyfilename):
     '''
     使用库作者提供的load_pkcs1()方法转换密钥
     二进制读出
     '''
-    keydata = open(keyfile,'rb').read()
+    keydata = open(keyfilename,'rb').read()
     pub_key = rsa.PublicKey.load_pkcs1(keydata)
     print('公钥已读取')
     return pub_key

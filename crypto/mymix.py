@@ -6,11 +6,12 @@ import rsa,pyDes
 import base
 
 #加密
-def encMix(key_filename,rawfilename,mode,operation):
+def encMix(rawfilename,key_filename,mode,operation):
     #rsa加密DES密钥
     pub_key = base.getPubKey(key_filename) 
     # 随机生成16字节密钥+IV，加解密时均自动使用
     des_data = ''.join(random.sample(string.ascii_letters+string.digits,16))
+    des_key,des_IV = des_data[:8],des_data[8:]
     enc_des = rsa.encrypt(des_data.encode('utf-8'),pub_key)
     des = pyDes.des(des_key,pyDes.CBC,des_IV,pad=None,padmode=pyDes.PAD_PKCS5)
 
@@ -34,14 +35,14 @@ def encMix(key_filename,rawfilename,mode,operation):
 def size_in_bytes(priv_key):
     #计算n模8的余数
     remainder = (int(len(bin(priv_key.n))) - 2) % 8
-    bytes = (int(len(bin(priv_key.n))) - 2) / 8
+    bytes = (int(len(bin(priv_key.n))) - 2) // 8   #用地板除，防止变成float
     #模不为0则要在地板除的基础上加1
     if remainder:
         bytes = (int(len(bin(priv_key.n))) - 2) // 8 + 1
     return bytes
     
 #解密
-def decMix(key_filename,rawfilename):
+def decMix(rawfilename,key_filename,mode,operation):
     #读取私钥
     priv_key = base.getPrivKey(key_filename)
 
