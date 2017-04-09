@@ -25,7 +25,7 @@ def judgMode(event):
         sig_filename_entry.delete(0,END)
         key_filename_entry['state'] = 'disabled'
         sig_filename_entry['state'] = 'disabled'
-    elif mode.get() == 'RSA' or '混合模式':
+    elif mode.get() == 'RSA':
         des_key_entry.delete(0,END)
         des_IV_entry.delete(0,END)
         sig_filename_entry.delete(0,END)
@@ -94,8 +94,10 @@ keys_choice.grid(row=1,column=1,padx=0,pady=5)
 #密钥生成方法，密钥生成按钮调用
 def rsakey():
     textVar = base.geneKeys(int(keys_choice.get()))
+    text['state'] = 'normal'
     text.insert(END,textVar)
     text.insert(END,'\n')
+    text['state'] = 'disabled'
 
 #密钥生成按钮
 gene_key_button = Button(init_frame,text='生成RSA密钥文件',command=rsakey,width=20)
@@ -224,7 +226,7 @@ def cryption():
     text.insert(END,'\n')
     text['state'] = 'disabled'
     #清空输入框
-    if textVar == '操作完成':
+    if '操作完成' in textVar:
         mode_choice.set('')
         operation_choice.set('')
         des_key_entry.delete(0,END)  #Entry组件没有set方法
