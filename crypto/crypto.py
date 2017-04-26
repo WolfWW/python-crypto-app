@@ -63,7 +63,7 @@ def doCrypto(mode,operation,des_key,des_IV,key_filename,sig_filename,rawfilename
         if operation == '签名':
             mysign.sigFile(rawfilename,key_filename,hash_method,mode,operation)
         elif operation == '验证':
-            mysign.veriFile(rawfilename,key_filename,sig_filename,mode,operation)
+            textVar = textVar + '\n' + mysign.veriFile(rawfilename,key_filename,sig_filename,mode,operation)
         else:
             textVar = '请选择%s正确的操作' % mode
             

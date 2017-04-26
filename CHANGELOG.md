@@ -1,11 +1,16 @@
 # Change Log
 这篇更新日志用来练习写CHANGELOG，顺带记录软件的完善过程。
+在1.1.1时添加了CHANGELOG，所以此版本及之前版本链接无效。
 
 ## [Unreleased]
 ### Changed
 - 密钥文件、签名文件、源文件输入框改为只能通过浏览文件添加
 ### Added
 - 对话框打印实时操作进度及耗时
+
+## [1.1.2] - 2017-04-26
+### Fixed
+ - 修复未打印签名验证结果的BUG
 
 ## [1.1.1] - 2017-04-09
 ### Fixed
@@ -30,7 +35,8 @@
 ## 0.1.0 - 2017-04-01
 - 初始命令行版本
 
-[Unreleased]: https://github.com/WolfWW/python-crypto-app/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/WolfWW/python-crypto-app/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/WolfWW/python-crypto-app/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/WolfWW/python-crypto-app/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/WolfWW/python-crypto-app/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/WolfWW/python-crypto-app/compare/v0.2.0...v1.0.0

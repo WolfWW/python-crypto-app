@@ -20,6 +20,7 @@ def veriFile(rawfilename,key_filename,sig_filename,mode,operation):
     pub_key = base.getPubKey(key_filename)
     signature = open(sig_filename,'rb').read()
     try:
-        print(rsa.verify(message,signature,pub_key),'检测完毕！文件未被篡改') 
+        rsa.verify(message,signature,pub_key)
+        return '检测完毕！文件未被篡改'
     except:
-        print('危险！文件被篡改') 
+        return '危险！文件被篡改'
