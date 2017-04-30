@@ -1,2 +1,3 @@
-rsa
-pyDes
+rsa==3.4.2
+pyDes==2.0.1
+pyaes==1.6.0

@@ -32,4 +32,3 @@ def desMode(rawfilename,mode,operation,des_key,des_IV):
             f2.close()  #操作完成后，打开的文件要关闭
         print('新文件是：%r' % newname)  #十分人性化告诉用户新文件是哪个 
         f1.close()
-    return '操作完成'

@@ -12,7 +12,7 @@ def newFileName(rawfilename,mode,operation):
     rawpathname = pathname.split('-')[0] #去掉可能存在的上一次加解密操作的命名
     count = 0  #自增变量，文件名查重后生成新文件名
     #新文件名=源文件名+加解密模式+count+后缀
-    newname = rawpathname +  '-mode-%s-operation-%s'%(mode,operation) + '.' + lastname
+    newname = rawpathname +  '-%s-%s'%(mode,operation) + '.' + lastname
     #查重后生成新文件名
     while os.path.isfile(newname):
         count += 1
@@ -32,7 +32,7 @@ def geneKeys(bits_num):
         f1.close()
         f2.write(rsa.PrivateKey.save_pkcs1(priv_key))
         f2.close()
-    return 'Done!密钥文件已生成'
+    return '%d位RSA密钥文件已生成，请转移保管，再次生成将覆盖' % bits_num
 
 #读取密钥文件中的公钥
 def getPubKey(keyfilename):
