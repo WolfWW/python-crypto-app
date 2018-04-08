@@ -14,7 +14,7 @@
  - python3
  - pyDes,python-rsa,pyaes
 
-第三方库安装：```pip -r requirements.txt```
+第三方库安装：```pip install -r requirements.txt```
 
 ## 使用方法（两种可选）：
  1. 代码下载后，双击运行crypto文件夹中的ginterface.py；
