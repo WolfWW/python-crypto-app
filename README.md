@@ -8,7 +8,7 @@
 程序只用在保护自己的文件，请不要干违法和影响他人的事情！
 
 ## Screenshots
-![mark](http://omvy9d3lc.bkt.clouddn.com/csdn/blog/20170521/160049735.png?imageslim)
+![mark](https://wolfww.oss-cn-hongkong.aliyuncs.com/crypto%E6%A0%B7%E5%9B%BE.PNG)
 
 ## 依赖:
  - python3
